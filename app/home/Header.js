@@ -13,6 +13,7 @@ const Header = () => (
 );
 
 export default Header
+
 class SearchIcon extends Component {
     launchSearch() {
         console.log("search launched");

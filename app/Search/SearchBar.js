@@ -37,7 +37,7 @@ export default class SearchBar extends Component {
         return (
             <View style={{flex :1}}>
                 <View style={styles.searchBar}>
-                    <Image style={styles.searchIcon} source={require('../images/Search-20.png')}></Image>
+                    <Image style={styles.searchIcon} source={require('../../images/Search-20.png')}></Image>
                     <TextInput style={styles.searchInput}
                                autoCapitalize={'characters'} autoCorrect={false} placeholder={'Search'}
                                onChangeText={(text) => this.setState({text})}
