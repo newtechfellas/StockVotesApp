@@ -1,25 +1,18 @@
 /**
- * Created by yuyutsu on 11/24/16.
+ * Created by Kalpana and Suman on 11/29/16.
  */
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
-import SearchBar from './SearchBar'
-
-const HomeView = () => (
-    <View style={styles.container}>
-        <Header/>
-        <SearchBar />
-    </View>
-);
 
 const Header = () => (
     <View style={styles.header}>
-        <Text style={styles.headerUserIcon}>User</Text>
+        <UserIcon/>
         <SearchIcon/>
     </View>
 );
 
+export default Header
 class SearchIcon extends Component {
     launchSearch() {
         console.log("search launched");
@@ -29,21 +22,30 @@ class SearchIcon extends Component {
         return (
             <View style={styles.headerSearchIcon}>
                 <TouchableHighlight onPress={this.launchSearch.bind(this)}>
-                    <Image source={require('../images/Search-20.png')}/>
+                    <Image source={require('../../images/Search-20.png')}/>
                 </TouchableHighlight>
             </View>
         )
     }
 }
 
+class UserIcon extends Component {
+    launchUserProfile() {
+        console.log("user profile launched");
+    }
 
-export default HomeView
+    render() {
+        return (
+            <View style={styles.headerUserIcon}>
+                <TouchableHighlight onPress={this.launchUserProfile.bind(this)}>
+                    <Image source={require('../../images/User-20.png')}/>
+                </TouchableHighlight>
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#C9E0E8'
-    },
     header: {
         flex: 1,
         paddingTop: 30,

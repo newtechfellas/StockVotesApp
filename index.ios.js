@@ -8,7 +8,7 @@ import React, {Component} from 'react';
 import {
     AppRegistry,
 } from 'react-native';
-import HomeView from './app/HomeView'
+import HomeView from './app/home/HomeView'
 
 export default class StockVotesApp extends Component {
     render() {
