@@ -23,7 +23,7 @@ class SearchIcon extends Component {
         return (
             <View style={styles.headerSearchIcon}>
                 <TouchableHighlight onPress={this.launchSearch.bind(this)}>
-                    <Image source={require('../../images/Search-20.png')}/>
+                    <Image style={styles.headerIconImage} source={require('../../images/Search-Green-50.png')}/>
                 </TouchableHighlight>
             </View>
         )
@@ -39,7 +39,7 @@ class UserIcon extends Component {
         return (
             <View style={styles.headerUserIcon}>
                 <TouchableHighlight onPress={this.launchUserProfile.bind(this)}>
-                    <Image source={require('../../images/User-20.png')}/>
+                    <Image style={styles.headerIconImage} source={require('../../images/User-Green-50.png')}/>
                 </TouchableHighlight>
             </View>
         )
@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         justifyContent: 'space-between',
         flexDirection: 'row'
+    },
+    headerIconImage : {
+        height : 20,
+        width : 20
     },
     headerUserIcon: {
         paddingLeft: 10
