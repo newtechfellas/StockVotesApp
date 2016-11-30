@@ -48,14 +48,14 @@ class UserIcon extends Component {
 
 const styles = StyleSheet.create({
     header: {
-        flex: 1,
+        flex: 0.2,
         paddingTop: 30,
         justifyContent: 'space-between',
         flexDirection: 'row'
     },
     headerIconImage : {
-        height : 20,
-        width : 20
+        height : 25,
+        width : 25
     },
     headerUserIcon: {
         paddingLeft: 10
