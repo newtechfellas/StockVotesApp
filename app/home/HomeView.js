@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
-import SearchBar from '../Search/SearchBar'
+import SearchBar from '../search/SearchBar'
 import Header from './Header'
 import TrendingStocks from './TrendingStocks'
 import TopUsers from './TopUsers'

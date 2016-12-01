@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
+import {Actions} from 'react-native-router-flux'
 
 const Header = () => (
     <View style={styles.header}>
@@ -17,12 +18,13 @@ export default Header
 class SearchIcon extends Component {
     launchSearch() {
         console.log("search launched");
+
     }
 
     render() {
         return (
             <View style={styles.headerSearchIcon}>
-                <TouchableHighlight onPress={this.launchSearch.bind(this)}>
+                <TouchableHighlight onPress={Actions.search}>
                     <Image style={styles.headerIconImage} source={require('../../images/Search-Green-50.png')}/>
                 </TouchableHighlight>
             </View>
