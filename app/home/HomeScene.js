@@ -4,13 +4,13 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
-import SearchBar from '../search/SearchBar'
+import SearchBar from '../search/SearchScene'
 import Header from './Header'
 import TrendingStocks from './TrendingStocks'
 import TopUsers from './TopUsers'
 import OpenPredictions from './OpenPredictions'
 
-const HomeView = () => (
+const HomeScene = () => (
     <View style={styles.container}>
         <Header/>
         <OpenPredictions/>
@@ -19,7 +19,7 @@ const HomeView = () => (
     </View>
 );
 
-export default HomeView
+export default HomeScene
 
 const styles = StyleSheet.create({
     container: {

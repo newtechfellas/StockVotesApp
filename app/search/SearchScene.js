@@ -5,7 +5,8 @@
 import React, {Component} from 'react';
 import {View, Image, TextInput, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
-export default class SearchBar extends Component {
+import util from '../Utils'
+export default class SearchScene extends Component {
     constructor() {
         super();
         this.state = {text: ""}
@@ -13,17 +14,18 @@ export default class SearchBar extends Component {
 
     componentDidMount() {
         //Fetch Stock Symbols from Cache or from Server
-        this.stockSymbols = ['GPRO', 'GOOG', 'NFLX']
+        this.stockSymbols = util.FetchStockSymbols()
     }
 
+    // searches for stocks symbols that match the user entered input value
     filterSymbols(input) {
         let symbolRows = [];
         if (!input || input.match(/^\s*$/)) {
             return symbolRows;
         }
         if (this.stockSymbols && this.stockSymbols.length > 0) {
-            symbolRows = this.stockSymbols.filter((symbol) => symbol.includes(input)).map((symbol, i) => <Text
-                key={i}>{symbol}</Text>)
+            symbolRows = this.stockSymbols.filter((stock) => stock.symbol.includes(input)).map((stock, i) =>
+                <StockScrollItem key={i} stock={stock}/>)
         }
         return symbolRows;
     }
@@ -44,12 +46,25 @@ export default class SearchBar extends Component {
                         <Text style={{color: 'green'}}>X</Text>
                     </TouchableHighlight>
                 </View>
-
-                <ScrollView style={{flex: 0.9}}>{symbolRows}</ScrollView>
+                <ScrollView keyboardDismissMode='on-drag'
+                            keyboardShouldPersistTaps={true}
+                            style={styles.searchResultsScroll}>
+                    {symbolRows}
+                </ScrollView>
             </View>
         )
     }
 }
+
+
+const StockScrollItem = ({stock, index}) => (
+    <TouchableHighlight onPress={() => Actions.stockDetails({stock: stock})}>
+        <View style={styles.scrollItem}>
+            <Text style={styles.scrollItemStockSymbol}>{stock.symbol}</Text>
+            <Text style={styles.scrollItemStockName}>{stock.name}</Text>
+        </View>
+    </TouchableHighlight>
+);
 
 const styles = StyleSheet.create({
     searchScreen: {
@@ -76,6 +91,21 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         flex: 0.1,
         paddingRight: 10
+    },
+    searchResultsScroll: {
+        flex: 0.9,
+        padding: 10
+    },
+    scrollItem: {
+        marginBottom: 15,
+        paddingBottom: 15,
+        borderBottomWidth: 0.5
+    },
+    scrollItemStockSymbol: {},
+    scrollItemStockName: {
+        fontSize: 10,
+        color: 'grey'
+    },
 
-    }
+
 });

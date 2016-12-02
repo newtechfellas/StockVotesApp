@@ -9,7 +9,7 @@ import {
     AppRegistry
 } from 'react-native';
 import {Router} from 'react-native-router-flux';
-import HomeView from './app/home/HomeView'
+import HomeView from './app/home/HomeScene'
 import scenes from './app/Scenes'
 
 export default class StockVotesApp extends Component {
