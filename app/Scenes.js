@@ -12,8 +12,8 @@ import Header from './home/Header'
 
 const scenes = Actions.create(
     <Scene key="root">
-        <Scene key="home" component={HomeView} title="Home" initial={true} hideNavBar={true}/>
-        <Scene key="search" component={SearchBar} title="Search" />
+        <Scene key="home" component={HomeView} title="Home" initial={true} hideNavBar={true} />
+        <Scene key="search" direction="vertical" component={SearchBar} title="Search"   />
     </Scene>
 );
 
