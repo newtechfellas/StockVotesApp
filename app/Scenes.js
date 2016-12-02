@@ -3,7 +3,8 @@
  */
 
 import React, {Component} from 'react';
-import {Actions, Scene, Router} from 'react-native-router-flux';
+import {Navigator} from 'react-native';
+import {Actions, Scene, Animations, Router} from 'react-native-router-flux';
 import HomeView from './home/HomeView'
 import SearchBar from './search/SearchBar'
 import Header from './home/Header'

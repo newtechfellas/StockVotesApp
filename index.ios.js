@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
+    AppRegistry
 } from 'react-native';
 import {Router} from 'react-native-router-flux';
 import HomeView from './app/home/HomeView'
@@ -15,7 +15,7 @@ import scenes from './app/Scenes'
 export default class StockVotesApp extends Component {
     render() {
         return (
-            <Router scenes={scenes}/>
+            <Router scenes={scenes} />
         );
     }
 }

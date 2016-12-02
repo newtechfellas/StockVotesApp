@@ -35,6 +35,7 @@ export default class SearchBar extends Component {
                 <View style={styles.searchBar}>
                     <Image style={styles.searchIcon} source={require('../../images/Search-Green-50.png')}></Image>
                     <TextInput style={styles.searchInput}
+                               autoFocus={true}
                                autoCapitalize={'characters'} autoCorrect={false} placeholder={'Search...'}
                                onChangeText={(text) => this.setState({text})}
                                value={this.state.text}
@@ -62,13 +63,13 @@ const styles = StyleSheet.create({
     searchIcon: {
         flex: 0.1,
         resizeMode: 'contain',
-        height: 20,
-        width: 20,
+        height: 25,
+        width: 25,
         alignItems: 'flex-start'
     },
     searchInput: {
         flex: 1,
-        height: 20,
+        height: 25,
         paddingLeft: 5
     },
     cancel: {
