@@ -72,11 +72,13 @@ const styles = StyleSheet.create({
     },
     searchBar: {
         flex: 0.1,
+	height: 30,
         paddingTop: 30,
         flexDirection: 'row',
     },
     searchIcon: {
         flex: 0.1,
+	marginTop: 10,
         resizeMode: 'contain',
         height: 25,
         width: 25,
@@ -84,10 +86,10 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         flex: 1,
-        height: 25,
         paddingLeft: 5
     },
     cancel: {
+	marginTop: 10,
         alignItems: 'flex-end',
         flex: 0.1,
         paddingRight: 10
