@@ -6,14 +6,28 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 
-const StockDetailsScene = ({stock}) => (
-    <View>
-        <TouchableHighlight onPress={Actions.pop} style={styles.cancel}>
-            <Text style={{color: 'green'}}>X</Text>
-        </TouchableHighlight>
-        <Text>{stock.symbol}</Text>
-    </View>
-);
+class StockDetailsScene extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        //Update title after launch to reflect the current stock
+        Actions.refresh({title : this.props.stock.symbol})
+    }
+
+    render() {
+        let {stock} = this.props;
+        return (
+            <View>
+                <TouchableHighlight onPress={Actions.pop} style={styles.cancel}>
+                    <Text style={{color: 'green'}}>X</Text>
+                </TouchableHighlight>
+                <Text>{stock.symbol}</Text>
+            </View>
+        )
+    }
+}
 
 export default StockDetailsScene
 
