@@ -32,6 +32,11 @@ class StockDetailsScene extends Component {
 export default StockDetailsScene
 
 const styles = StyleSheet.create({
+    stockDetails : {
+        marginTop : 50,
+        flex : 1,
+        flexDirection: 'row'
+    },
     cancel: {
         alignItems: 'flex-start',
         flex: 0.1,
