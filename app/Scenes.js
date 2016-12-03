@@ -14,7 +14,10 @@ import UserProfile from './sidemenu/UserProfile'
  Notes:
  1. panHandlers = {null} property required to prevent swipe back or down from popping the screen
  2. if you need to update the title at runtime, use componentDidMount method of the component reference to call refresh on Actions
- Ex: Actions.refresh({title : this.props.stock.symbol})
+ Ex: componentDidMount() {
+        //Update title after launch to reflect the current stock
+        Actions.refresh({title : this.props.foo})
+    }
  */
 
 const scenes = Actions.create(

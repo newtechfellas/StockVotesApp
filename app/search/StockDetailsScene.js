@@ -13,7 +13,7 @@ class StockDetailsScene extends Component {
 
     componentDidMount() {
         //Update title after launch to reflect the current stock
-        Actions.refresh({title : this.props.stock.symbol})
+        Actions.refresh({title : this.props.stock.name})
     }
 
     render() {
