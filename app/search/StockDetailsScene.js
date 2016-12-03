@@ -19,10 +19,10 @@ class StockDetailsScene extends Component {
     render() {
         let {stock} = this.props;
         return (
-            <View>
-                <TouchableHighlight onPress={Actions.pop} style={styles.cancel}>
-                    <Text style={{color: 'green'}}>X</Text>
-                </TouchableHighlight>
+            <View style={styles.stockDetails}>
+                {/*<TouchableHighlight onPress={Actions.pop} style={styles.cancel}>*/}
+                    {/*<Text style={{color: 'green'}}>X</Text>*/}
+                {/*</TouchableHighlight>*/}
                 <Text>{stock.symbol}</Text>
             </View>
         )

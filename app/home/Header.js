@@ -16,10 +16,6 @@ const Header = () => (
 export default Header
 
 class SearchIcon extends Component {
-    launchSearch() {
-        console.log("search launched");
-
-    }
 
     render() {
         return (
@@ -40,7 +36,7 @@ class UserIcon extends Component {
     render() {
         return (
             <View style={styles.headerUserIcon}>
-                <TouchableHighlight onPress={this.launchUserProfile.bind(this)}>
+                <TouchableHighlight onPress={() => Actions.refresh({key: 'drawer', open: value => !value })}>
                     <Image style={styles.headerIconImage} source={require('../../images/User-Green-50.png')}/>
                 </TouchableHighlight>
             </View>

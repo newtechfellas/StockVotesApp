@@ -8,6 +8,7 @@ import {Actions, Scene, Animations, Router} from 'react-native-router-flux';
 import HomeScene from './home/HomeScene'
 import SearchScene from './search/SearchScene'
 import StockDetailsScene from './search/StockDetailsScene'
+import UserProfile from './sidemenu/UserProfile'
 
 /*
  Notes:
@@ -18,8 +19,10 @@ import StockDetailsScene from './search/StockDetailsScene'
 
 const scenes = Actions.create(
     <Scene key="root"  >
-        <Scene key="home" component={HomeScene} panHandlers={null} title="Home" initial={true} hideNavBar={true} />
-        <Scene key="search" direction="vertical" panHandlers={null} component={SearchScene} title="Search"   />
+        <Scene key="drawer" component={UserProfile} open={false}>
+            <Scene key="home" component={HomeScene} panHandlers={null} title="Home" initial={true} hideNavBar={true} />
+        </Scene>
+        <Scene key="search" direction="vertical" panHandlers={null} component={SearchScene} title="Search" hideNavBar={true}  />
         <Scene key="stockDetails" direction="vertical" panHandlers={null} component={StockDetailsScene} title="StockDetails"  hideNavBar={false} />
     </Scene>
 );
