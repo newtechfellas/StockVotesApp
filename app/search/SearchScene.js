@@ -6,6 +6,8 @@ import React, {Component} from 'react';
 import {View, Image, TextInput, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
+import commonStyles from '../CommonStyles'
+
 export default class SearchScene extends Component {
     constructor() {
         super();
@@ -13,8 +15,17 @@ export default class SearchScene extends Component {
     }
 
     componentDidMount() {
+        let component = this;
         //Fetch Stock Symbols from Cache or from Server
-        this.stockSymbols = util.FetchStockSymbols()
+        util.FetchStockSymbols()
+            .then((responseJson) => {
+                //persist the data in Cache
+                component.stockSymbols = responseJson;
+                component.setState({ "dataFetched" : true})
+            })
+            .catch((error) => {
+                component.setState({ "dataFetched" : false, error : error})
+            });
     }
 
     // searches for stocks symbols that match the user entered input value
@@ -33,7 +44,7 @@ export default class SearchScene extends Component {
     render() {
         let symbolRows = this.filterSymbols(this.state.text);
         return (
-            <View style={styles.searchScreen}>
+            <View style={commonStyles.container}>
                 <View style={styles.searchBar}>
                     <Image style={styles.searchIcon} source={require('../../images/Search-Green-50.png')}></Image>
                     <TextInput style={styles.searchInput}
@@ -67,18 +78,15 @@ const StockScrollItem = ({stock, index}) => (
 );
 
 const styles = StyleSheet.create({
-    searchScreen: {
-        flex: 1
-    },
     searchBar: {
         flex: 0.1,
-	height: 30,
-        paddingTop: 30,
+        height: 30,
+        paddingTop: 20,
         flexDirection: 'row',
     },
     searchIcon: {
         flex: 0.1,
-	marginTop: 10,
+        marginTop: 10,
         resizeMode: 'contain',
         height: 25,
         width: 25,
@@ -89,7 +97,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5
     },
     cancel: {
-	marginTop: 10,
+        marginTop: 10,
         alignItems: 'flex-end',
         flex: 0.1,
         paddingRight: 10

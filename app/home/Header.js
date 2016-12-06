@@ -56,10 +56,10 @@ const styles = StyleSheet.create({
         width : 25
     },
     headerUserIcon: {
-        paddingLeft: 10
+        paddingLeft: 5
     },
     headerSearchIcon: {
-        paddingRight: 10
+        paddingRight: 5
     }
 
 });

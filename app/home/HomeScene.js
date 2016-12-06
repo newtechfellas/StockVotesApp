@@ -10,6 +10,7 @@ import TrendingStocks from './TrendingStocks'
 import TopUsers from './TopUsers'
 import OpenPredictions from './OpenPredictions'
 import util from '../Utils'
+import commonStyles from '../CommonStyles'
 
 class HomeScene extends Component {
     constructor() {
@@ -32,7 +33,7 @@ class HomeScene extends Component {
         let { dataFetched } = this.state;
         if ( dataFetched ) {
             return (
-                <View style={styles.container}>
+                <View style={commonStyles.container}>
                     <Header/>
                     <OpenPredictions/>
                     <TrendingStocks/>
@@ -56,10 +57,3 @@ class HomeScene extends Component {
 }
 
 export default HomeScene
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
-    }
-});
