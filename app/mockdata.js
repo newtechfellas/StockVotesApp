@@ -4,61 +4,61 @@
 
 exports.MockHomeViewData = function () {
     let topUsers = [];
-    for (let i=0; i< 10; i++) {
-        topUsers.push({"name" : `"Foo${i}"`, "score" : 1000+i})
+    for (let i = 0; i < 10; i++) {
+        topUsers.push({"name": `"Foo${i}"`, "score": 1000 + i})
     }
-    let data =  {
-        "userSummary" : {
-            "name" : "James Bond",
-            "score" : 200,
-            "openPredictions" : [
+    let data = {
+        "userSummary": {
+            "name": "James Bond",
+            "score": 200,
+            "openPredictions": [
                 {
-                    "symbol" : "NFLX",
-                    "willGain" : false
+                    "symbol": "NFLX",
+                    "type": "WillGain",
+                    "value": false
                 },
                 {
-                    "Symbol" : "GOOG",
-                    "WillLose" : false
+                    "symbol": "GOOG",
+                    "type": "willLose",
+                    "value": false
                 },
                 {
-                    "Symbol" : "NKE",
-                    "WillGain2Perc" : true
+                    "symbol": "NKE",
+                    "type": "willGain2Perc",
+                    "value": true
                 },
                 {
-                    "Symbol" : "AMBA",
-                    "WillGain5Perc" : true
+                    "symbol": "AMBA",
+                    "type": "willGain5Perc",
+                    "value": true
                 }
             ]
         },
-        "trendingStocks" : [
+        "trendingStocks": [
             {
-                "symbol" : "GOOG",
-                "predictions" : 123
+                "symbol": "GOOG",
+                "predictions": 123
             },
             {
-                "symbol" : "NKE",
-                "predictions" : 100
+                "symbol": "NKE",
+                "predictions": 100
             },
             {
-                "symbol" : "AMBA",
-                "predictions" : 110
+                "symbol": "AMBA",
+                "predictions": 110
             },
             {
-                "symbol" : "GPRO",
-                "predictions" : 120
+                "symbol": "GPRO",
+                "predictions": 120
             }
         ],
-        "topUsers" : topUsers
+        "topUsers": topUsers
     };
-    return new Promise(function (resolve, reject) {
-        setTimeout(function() {
-            resolve(data);
-        }, 2000)
-    } );
+    return wrapWithPromise(data);
 };
 
 exports.MockFetchStockSymbols = function () {
-    let data =  [
+    let data = [
         {
             'symbol': 'GPRO',
             'name': 'GOPRO'
@@ -76,9 +76,13 @@ exports.MockFetchStockSymbols = function () {
             'name': 'NIKE'
         }
     ];
+    return wrapWithPromise(data);
+};
+
+function wrapWithPromise(data) {
     return new Promise(function (resolve, reject) {
-        setTimeout(function() {
+        setTimeout(function () {
             resolve(data);
         }, 1000)
-    } );
-};
+    });
+}

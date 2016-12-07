@@ -16,12 +16,14 @@ class HomeScene extends Component {
     constructor() {
         super();
         this.state = {}
+        this.homeViewData = {};
     }
     componentDidMount() {
         let component = this;
         let data = util.FetchHomeViewData()
             .then((responseJson) => {
                 //persist the data in Cache
+                component.homeViewData = responseJson;
                 component.setState({ "dataFetched" : true})
             })
             .catch((error) => {
@@ -35,7 +37,7 @@ class HomeScene extends Component {
             return (
                 <View style={commonStyles.container}>
                     <Header/>
-                    <OpenPredictions/>
+                    <OpenPredictions predictions={this.homeViewData.userSummary.openPredictions}/>
                     <TrendingStocks/>
                     <TopUsers/>
                 </View>
