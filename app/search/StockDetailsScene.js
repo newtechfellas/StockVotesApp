@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
+import commonStyles from '../CommonStyles'
 
 class StockDetailsScene extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class StockDetailsScene extends Component {
     render() {
         let {stock} = this.props;
         return (
-            <View style={styles.stockDetails}>
+            <View style={[commonStyles.container, styles.stockDetails]}>
                 {/*<TouchableHighlight onPress={Actions.pop} style={styles.cancel}>*/}
                     {/*<Text style={{color: 'green'}}>X</Text>*/}
                 {/*</TouchableHighlight>*/}

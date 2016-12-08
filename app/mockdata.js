@@ -14,23 +14,23 @@ exports.MockHomeViewData = function () {
             "openPredictions": [
                 {
                     "symbol": "NFLX",
-                    "type": "WillGain",
-                    "value": false
+                    "type": "G",
                 },
                 {
                     "symbol": "GOOG",
-                    "type": "willLose",
-                    "value": false
+                    "type": "L",
                 },
                 {
                     "symbol": "NKE",
-                    "type": "willGain2Perc",
-                    "value": true
+                    "type": "2G",
                 },
                 {
                     "symbol": "AMBA",
-                    "type": "willGain5Perc",
-                    "value": true
+                    "type": "5G",
+                },
+                {
+                    "symbol": "DO",
+                    "type": "2L",
                 }
             ]
         },
@@ -74,6 +74,10 @@ exports.MockFetchStockSymbols = function () {
         {
             'symbol': 'NKE',
             'name': 'NIKE'
+        },
+        {
+            'symbol': 'DO',
+            'name': 'Diamond Offshore Drillings'
         }
     ];
     return wrapWithPromise(data);

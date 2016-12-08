@@ -8,7 +8,7 @@ import {StyleSheet} from 'react-native';
 var commonStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        // backgroundColor: '#eef7f8',
         padding: 5
     }
 });
