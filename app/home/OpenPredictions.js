@@ -9,7 +9,9 @@ import {Actions} from 'react-native-router-flux'
 export default class OpenPredictions extends Component {
     render() {
         let {predictions} = this.props;
-        let predictionRows = predictions.map((prediction, i) => <OpenPredictionItem key={i} prediction={prediction} backgroundColor={backgroundColorFor(prediction.type)}/>);
+        let predictionRows = predictions.map((prediction, i) => <OpenPredictionItem key={i} prediction={prediction}
+                                                                                    backgroundColor={backgroundColorFor(prediction.type)}
+                                                                                    borderColor={backgroundColorFor(prediction.type)}/>);
         return (
             <View style={styles.OpenPredictions}>
                 <Text style={styles.openPredictionTitle}>Active Predictions</Text>
@@ -23,11 +25,13 @@ export default class OpenPredictions extends Component {
     }
 }
 
-const OpenPredictionItem = ({prediction, backgroundColor}) => (
+const OpenPredictionItem = ({prediction, backgroundColor, borderColor}) => (
     <TouchableHighlight onPress={() => Actions.stockDetails({stock: prediction})}>
         <View style={styles.openPredictionItem}>
             <Text style={styles.predictionSymbol}>{prediction.symbol}</Text>
-            <Text style={[styles.predictionValue, backgroundColor && {backgroundColor} ]}>{predictionValueDescription(prediction.type)}</Text>
+            <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
+                <Text style={styles.predictionValue}>{predictionValueDescription(prediction.type)}</Text>
+            </View>
         </View>
     </TouchableHighlight>
 );
@@ -37,11 +41,11 @@ function backgroundColorFor(predictionType) {
         case 'G' :
         case '2G' :
         case '5G' :
-            return '#85c559';
+            return '#21ce99';
         case 'L' :
         case '2L' :
         case '5L' :
-            return '#FF5733';
+            return '#f66323';
     }
 }
 
@@ -71,26 +75,32 @@ const styles = StyleSheet.create({
         color: 'blue',
         marginBottom: 10
     },
-    predictionValue : {
-        backgroundColor : '#85c559',
+    predictionValueContainer: {
+        backgroundColor: '#85c559',
         width: 100,
-        textAlign : 'center',
-        color : 'white',
-        height : 30,
-        paddingTop : 7,
+        height: 30,
+
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#85c559'
     },
-    predictionSymbol : {
-        paddingTop : 7,
-        height : 30,
+    predictionValue: {
+        textAlign: 'center',
+        color: 'white',
+        paddingTop: 5,
     },
-    predictionIcon : {
-        resizeMode:'contain',
-        height : 25,
+    predictionSymbol: {
+        paddingTop: 7,
+        height: 30,
+    },
+    predictionIcon: {
+        resizeMode: 'contain',
+        height: 25,
         // width : 15,
-        marginTop : 5
+        marginTop: 5
     },
     openPredictionItem: {
-        height : 35,
+        height: 35,
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 5,
