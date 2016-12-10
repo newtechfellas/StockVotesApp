@@ -43,8 +43,9 @@ export default class SearchScene extends Component {
 
     render() {
         let symbolRows = this.filterSymbols(this.state.text);
+        let backgroundColor = this.state.text ?  undefined : '#d1cecd';
         return (
-            <View style={commonStyles.container}>
+            <View style={[commonStyles.container, {backgroundColor}]}>
                 <View style={styles.searchBar}>
                     <Image style={styles.searchIcon} source={require('../../images/Search-Green-50.png')}></Image>
                     <TextInput style={styles.searchInput}
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
         height: 30,
         paddingTop: 20,
         flexDirection: 'row',
+        backgroundColor: 'white'
     },
     searchIcon: {
         flex: 0.1,
