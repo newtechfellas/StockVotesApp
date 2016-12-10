@@ -18,3 +18,4 @@ exports.FetchHomeViewData = function() {
     //TODO: make server call
     return mock.MockHomeViewData()
 };
+

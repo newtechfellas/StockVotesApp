@@ -5,13 +5,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
+import common from '../Common'
 
 export default class OpenPredictions extends Component {
     render() {
         let {predictions} = this.props;
         let predictionRows = predictions.map((prediction, i) => <OpenPredictionItem key={i} prediction={prediction}
-                                                                                    backgroundColor={backgroundColorFor(prediction.type)}
-                                                                                    borderColor={backgroundColorFor(prediction.type)}/>);
+                                                                                    backgroundColor={common.backgroundColorForPredictionType(prediction.type)}
+                                                                                    borderColor={common.backgroundColorForPredictionType(prediction.type)}/>);
         return (
             <View style={styles.OpenPredictions}>
                 <Text style={styles.openPredictionTitle}>Active Predictions</Text>
@@ -30,41 +31,11 @@ const OpenPredictionItem = ({prediction, backgroundColor, borderColor}) => (
         <View style={styles.openPredictionItem}>
             <Text style={styles.predictionSymbol}>{prediction.symbol}</Text>
             <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
-                <Text style={styles.predictionValue}>{predictionValueDescription(prediction.type)}</Text>
+                <Text style={styles.predictionValue}>{common.descriptionForPredictionType(prediction.type)}</Text>
             </View>
         </View>
     </TouchableHighlight>
 );
-
-function backgroundColorFor(predictionType) {
-    switch (predictionType) {
-        case 'G' :
-        case '2G' :
-        case '5G' :
-            return '#21ce99';
-        case 'L' :
-        case '2L' :
-        case '5L' :
-            return '#f66323';
-    }
-}
-
-function predictionValueDescription(predictionType) {
-    switch (predictionType) {
-        case 'G' :
-            return 'BULLISH';
-        case '2G' :
-            return '2% BULLISH';
-        case '5G' :
-            return '5% BULLISH';
-        case 'L' :
-            return 'BEARISH';
-        case '2L' :
-            return '2% BEARISH';
-        case '5L' :
-            return '5% BEARISH';
-    }
-}
 
 const styles = StyleSheet.create({
     OpenPredictions: {
