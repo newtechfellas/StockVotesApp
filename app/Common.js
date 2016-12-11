@@ -2,32 +2,10 @@
  * Created by Kalpana and Suman on 12/9/16.
  */
 
-exports.descriptionForPredictionType = function (predictionType) {
-    switch (predictionType) {
-        case 'G' :
-            return 'BULLISH';
-        case '2G' :
-            return '2% BULLISH';
-        case '5G' :
-            return '5% BULLISH';
-        case 'L' :
-            return 'BEARISH';
-        case '2L' :
-            return '2% BEARISH';
-        case '5L' :
-            return '5% BEARISH';
-    }
-};
+import React, {Component} from 'react';
+import {Text} from 'react-native';
+import styles from './CommonStyles'
 
-exports.backgroundColorForPredictionType = function (predictionType) {
-    switch (predictionType) {
-        case 'G' :
-        case '2G' :
-        case '5G' :
-            return '#21ce99';
-        case 'L' :
-        case '2L' :
-        case '5L' :
-            return '#f66323';
-    }
-};
+const MyText = ({data, style}) => ( <Text style={[styles.text, style]}>{data}</Text> );
+
+export default MyText

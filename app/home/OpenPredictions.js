@@ -5,14 +5,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
-import common from '../Common'
+import util from '../Utils'
+import MyText from '../Common'
 
 export default class OpenPredictions extends Component {
     render() {
         let {predictions} = this.props;
         let predictionRows = predictions.map((prediction, i) => <OpenPredictionItem key={i} prediction={prediction}
-                                                                                    backgroundColor={common.backgroundColorForPredictionType(prediction.type)}
-                                                                                    borderColor={common.backgroundColorForPredictionType(prediction.type)}/>);
+                                                                                    backgroundColor={util.backgroundColorForPredictionType(prediction.type)}
+                                                                                    borderColor={util.backgroundColorForPredictionType(prediction.type)}/>);
         return (
             <View style={styles.OpenPredictions}>
                 <Text style={styles.openPredictionTitle}>Active Predictions</Text>
@@ -29,9 +30,9 @@ export default class OpenPredictions extends Component {
 const OpenPredictionItem = ({prediction, backgroundColor, borderColor}) => (
     <TouchableHighlight onPress={() => Actions.stockDetails({stock: prediction})}>
         <View style={styles.openPredictionItem}>
-            <Text style={styles.predictionSymbol}>{prediction.symbol}</Text>
+            <MyText style={styles.predictionSymbol} data={prediction.symbol} />
             <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
-                <Text style={styles.predictionValue}>{common.descriptionForPredictionType(prediction.type)}</Text>
+                <MyText style={styles.predictionValue} data={util.descriptionForPredictionType(prediction.type)}/>
             </View>
         </View>
     </TouchableHighlight>

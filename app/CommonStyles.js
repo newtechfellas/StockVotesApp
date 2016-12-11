@@ -10,6 +10,10 @@ var commonStyles = StyleSheet.create({
         flex: 1,
         // backgroundColor: '#eef7f8',
         padding: 5
+    },
+    text : {
+        fontFamily : 'verdana',
+        fontSize: 12
     }
 });
 
