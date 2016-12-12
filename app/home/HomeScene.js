@@ -4,10 +4,8 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
-import SearchBar from '../search/SearchScene'
 import Header from './Header'
 import TrendingStocks from './TrendingStocks'
-import TopUsers from './TopUsers'
 import OpenPredictions from './OpenPredictions'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
@@ -39,7 +37,7 @@ class HomeScene extends Component {
                 <View style={commonStyles.container}>
                     <Header/>
                     <OpenPredictions predictions={this.homeViewData.userSummary.openPredictions}/>
-                    <TrendingStocks/>
+                    <TrendingStocks trending={this.homeViewData.trendingStocks}/>
                 </View>
             )
         }

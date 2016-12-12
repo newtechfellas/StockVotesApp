@@ -65,12 +65,6 @@ const styles = StyleSheet.create({
         paddingTop: 7,
         height: 30,
     },
-    predictionIcon: {
-        resizeMode: 'contain',
-        height: 25,
-        // width : 15,
-        marginTop: 5
-    },
     openPredictionItem: {
         height: 35,
         justifyContent: 'space-between',
