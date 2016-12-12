@@ -54,7 +54,7 @@ export default class SearchScene extends Component {
                                onChangeText={(text) => this.setState({text})}
                                value={this.state.text}
                     />
-                    <TouchableHighlight onPress={Actions.pop} style={styles.cancel}>
+                    <TouchableHighlight underlayColor='#efefef' onPress={Actions.pop} style={styles.cancel}>
                         <Text style={{color: 'green'}}>X</Text>
                     </TouchableHighlight>
                 </View>
@@ -70,7 +70,7 @@ export default class SearchScene extends Component {
 
 
 const StockScrollItem = ({stock, index}) => (
-    <TouchableHighlight onPress={() => Actions.stockDetails({stock: stock})}>
+    <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: stock})}>
         <View style={styles.scrollItem}>
             <Text style={styles.scrollItemStockSymbol}>{stock.symbol}</Text>
             <Text style={styles.scrollItemStockName}>{stock.name}</Text>

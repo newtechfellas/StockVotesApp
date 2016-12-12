@@ -28,7 +28,7 @@ export default class OpenPredictions extends Component {
 }
 
 const OpenPredictionItem = ({prediction, backgroundColor, borderColor}) => (
-    <TouchableHighlight onPress={() => Actions.stockDetails({stock: prediction})}>
+    <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: prediction})}>
         <View style={styles.openPredictionItem}>
             <MyText style={styles.predictionSymbol} data={prediction.symbol} />
             <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>

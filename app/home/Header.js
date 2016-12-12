@@ -20,7 +20,7 @@ class SearchIcon extends Component {
     render() {
         return (
             <View style={styles.headerSearchIcon}>
-                <TouchableHighlight onPress={Actions.search}>
+                <TouchableHighlight underlayColor='#efefef' onPress={Actions.search}>
                     <Image style={styles.headerIconImage} source={require('../../images/Search-Green-50.png')}/>
                 </TouchableHighlight>
             </View>
@@ -36,7 +36,7 @@ class UserIcon extends Component {
     render() {
         return (
             <View style={styles.headerUserIcon}>
-                <TouchableHighlight onPress={() => Actions.refresh({key: 'drawer', open: value => !value })}>
+                <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.refresh({key: 'drawer', open: value => !value })}>
                     <Image style={styles.headerIconImage} source={require('../../images/User-Green-50.png')}/>
                 </TouchableHighlight>
             </View>
