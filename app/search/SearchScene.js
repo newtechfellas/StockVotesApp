@@ -7,6 +7,7 @@ import {View, Image, TextInput, Text, StyleSheet, ScrollView, TouchableHighlight
 import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
+import MyText from '../Common'
 
 export default class SearchScene extends Component {
     constructor() {
@@ -43,9 +44,9 @@ export default class SearchScene extends Component {
 
     render() {
         let symbolRows = this.filterSymbols(this.state.text);
-        let backgroundColor = this.state.text ?  undefined : '#d1cecd';
+        let backgroundColor = this.state.text ?  undefined : 'grey';
         return (
-            <View style={[commonStyles.container, {backgroundColor}]}>
+            <View style={[ { flex : 1}, {backgroundColor}]}>
                 <View style={styles.searchBar}>
                     <Image style={styles.searchIcon} source={require('../../images/Search-Green-50.png')}></Image>
                     <TextInput style={styles.searchInput}
@@ -55,12 +56,12 @@ export default class SearchScene extends Component {
                                value={this.state.text}
                     />
                     <TouchableHighlight underlayColor='#efefef' onPress={Actions.pop} style={styles.cancel}>
-                        <Text style={{color: 'green'}}>X</Text>
+                        <Text style={{color: 'green', width: 20, fontSize: 15}}>X</Text>
                     </TouchableHighlight>
                 </View>
                 <ScrollView keyboardDismissMode='on-drag'
                             keyboardShouldPersistTaps={true}
-                            style={styles.searchResultsScroll}>
+                            style={[styles.searchResultsScroll, commonStyles.container]}>
                     {symbolRows}
                 </ScrollView>
             </View>
@@ -72,17 +73,18 @@ export default class SearchScene extends Component {
 const StockScrollItem = ({stock, index}) => (
     <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: stock})}>
         <View style={styles.scrollItem}>
-            <Text style={styles.scrollItemStockSymbol}>{stock.symbol}</Text>
-            <Text style={styles.scrollItemStockName}>{stock.name}</Text>
+            <MyText style={styles.scrollItemStockSymbol} data={stock.symbol} />
+            <MyText style={styles.scrollItemStockName} data={stock.name} />
         </View>
     </TouchableHighlight>
 );
 
 const styles = StyleSheet.create({
     searchBar: {
-        flex: 0.1,
-        height: 30,
+        // flex: 0.1,
+        // height: 25,
         paddingTop: 20,
+        paddingBottom: 20,
         flexDirection: 'row',
         backgroundColor: 'white'
     },
@@ -90,17 +92,21 @@ const styles = StyleSheet.create({
         flex: 0.1,
         marginTop: 10,
         resizeMode: 'contain',
-        height: 25,
-        width: 25,
+        height: 15,
+        width: 15,
         alignItems: 'flex-start'
     },
     searchInput: {
         flex: 1,
-        paddingLeft: 5
+        height : 20,
+        marginTop: 10,
+        paddingLeft: 5,
+        fontFamily : 'verdana'
     },
     cancel: {
-        marginTop: 10,
+        // marginTop: 10,
         alignItems: 'flex-end',
+        marginTop: 10,
         flex: 0.1,
         paddingRight: 10
     },
