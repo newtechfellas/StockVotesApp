@@ -19,6 +19,12 @@ exports.FetchHomeViewData = function() {
     return mock.MockHomeViewData()
 };
 
+exports.FetchStockDetailsViewData = function(symbol) {
+
+    //TODO: make server call
+    return mock.MockFetchStockDetails(symbol)
+};
+
 exports.backgroundColorForPredictionType = function (predictionType) {
     switch (predictionType) {
         case 'G' :

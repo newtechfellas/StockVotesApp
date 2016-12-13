@@ -7,7 +7,7 @@ import {View, Image, TextInput, Text, StyleSheet, ScrollView, TouchableHighlight
 import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
-import MyText from '../Common'
+import {MyText} from '../Common'
 
 export default class SearchScene extends Component {
     constructor() {

@@ -14,6 +14,11 @@ var commonStyles = StyleSheet.create({
     text : {
         fontFamily : 'verdana',
         fontSize: 12
+    },
+    loadingIndicator : {
+        flex:1,
+        justifyContent:'center',
+        alignItems: 'center'
     }
 });
 

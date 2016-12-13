@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
-import MyText from '../Common'
+import {MyText} from '../Common'
 
 export default class OpenPredictions extends Component {
     render() {

@@ -3,9 +3,14 @@
  */
 
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {View,Text,ActivityIndicator} from 'react-native';
 import styles from './CommonStyles'
 
 const MyText = ({data, style}) => ( <Text style={[styles.text, style]}>{data}</Text> );
 
-export default MyText
+const LoadingView = () => (
+    <View style={styles.loadingIndicator}>
+        <ActivityIndicator color='#85c559' size='large' />
+    </View>
+);
+export {MyText, LoadingView}

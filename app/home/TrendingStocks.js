@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, Text, Image, TouchableHighlight} from 'react-native';
-import MyText from '../Common'
+import {MyText} from '../Common'
 import {Actions} from 'react-native-router-flux'
 
 export default class TrendingStocks extends Component {
@@ -37,7 +37,7 @@ const TrendingItem = ({stock}) => (
 
 const styles = StyleSheet.create({
     TrendingStocks: {
-        flex: 1,
+        flex: 1
     },
     stockTitle: {
         fontSize: 12,

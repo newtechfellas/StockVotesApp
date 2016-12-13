@@ -83,6 +83,23 @@ exports.MockFetchStockSymbols = function () {
     return wrapWithPromise(data);
 };
 
+exports.MockFetchStockDetails = function (stock) {
+    let data = {
+        'symbol' : stock,
+        'name': 'Stock Name',
+        'totalPredictions' : 123,
+        'myPrediction' : 'L',
+        'currentPrice' :  343.3,
+        'highPrice' : 343,
+        'openPrice' : 312,
+        'lowPrice' : 310,
+        'volume' : 3434343,
+        'averageVolume': 343453,
+    };
+    return wrapWithPromise(data);
+};
+
+
 function wrapWithPromise(data) {
     return new Promise(function (resolve, reject) {
         setTimeout(function () {

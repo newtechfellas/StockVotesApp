@@ -26,7 +26,7 @@ const scenes = Actions.create(
             <Scene key="home" component={HomeScene} panHandlers={null} title="Home" initial={true} hideNavBar={true} />
         </Scene>
         <Scene key="search" direction="vertical" panHandlers={null} component={SearchScene} title="Search" hideNavBar={true}  />
-        <Scene key="stockDetails" direction="vertical" panHandlers={null} component={StockDetailsScene} title="StockDetails"  hideNavBar={false} />
+        <Scene key="stockDetails" direction="vertical" panHandlers={null} component={StockDetailsScene} title="StockDetails"  hideNavBar={true} />
     </Scene>
 );
 
