@@ -90,6 +90,8 @@ exports.MockFetchStockDetails = function (stock) {
         'totalPredictions' : 123,
         'myPrediction' : 'L',
         'currentPrice' :  343.3,
+        'changePrice' :  -4.1,
+        'changePercentage' : 1.3,
         'highPrice' : 343,
         'openPrice' : 312,
         'lowPrice' : 310,
