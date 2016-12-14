@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {View, Image, TextInput, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
+import {View, Image, TextInput, Text, StyleSheet, ScrollView, Platform, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         flex: 1,
-        height : 20,
-        marginTop: 10,
+        height : (Platform.OS === 'ios' ) ? 20 : 40,
+        marginTop: (Platform.OS === 'ios' ) ? 10 : 0,
         paddingLeft: 5,
         fontFamily : 'verdana'
     },
