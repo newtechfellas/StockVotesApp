@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Image, ActivityIndicator, TouchableHighlight} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, ActivityIndicator, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import commonStyles from '../CommonStyles'
 import {LoadingView, MyText} from '../Common'
@@ -50,10 +50,10 @@ const CurrentStockPrice = ({stockViewData}) => {
     const currentPriceParts = stockViewData.currentPrice.toString().split(".");
     return (
         <View style={styles.currentPriceView}>
-            <View style={{flexDirection:'row', alignItems: 'flex-end'}}>
-                <MyText style={{fontSize: 30}} data="$"/>
-                <MyText style={styles.currentPriceValue} data={currentPriceParts[0]}/>
-                <MyText style={{fontSize:30}} data={"."+currentPriceParts[1]}/>
+            <View style={{flexDirection:'row'}}>
+                <MyText style={[commonStyles.stockPriceFont,{fontSize: 30}]} data="$"/>
+                <MyText style={[commonStyles.stockPriceFont, {fontSize: 40} ]} data={currentPriceParts[0]}/>
+                <MyText style={[commonStyles.stockPriceFont,{fontSize: 30}]} data={"."+currentPriceParts[1]}/>
             </View>
             <MyText style={[styles.changePercentage, {color: changePercentageColor}]}
                     data={`${stockViewData.changePrice} (${stockViewData.changePercentage}%)`}/>
@@ -98,10 +98,6 @@ const styles = StyleSheet.create({
     currentPriceView: {
         alignItems: 'center',
         flex: 1
-    },
-    currentPriceValue: {
-        fontSize: 40,
-
     },
     changePercentage: {
         fontSize: 12,

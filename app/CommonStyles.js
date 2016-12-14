@@ -15,6 +15,11 @@ var commonStyles = StyleSheet.create({
         fontFamily : 'verdana',
         fontSize: 12
     },
+
+    stockPriceFont : {
+        fontFamily: 'American Typewriter',
+        fontWeight: '100'
+    },
     loadingIndicator : {
         flex:1,
         justifyContent:'center',
