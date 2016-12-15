@@ -13,4 +13,10 @@ const LoadingView = () => (
         <ActivityIndicator color='#85c559' size='large' />
     </View>
 );
-export {MyText, LoadingView}
+
+const ErrorView = () => (
+    <View style={styles.errorViewContainer}>
+        <Text style={{color:'red', fontSize:20}}>Error occurred. Please try again</Text>
+    </View>
+);
+export {MyText, LoadingView, ErrorView}

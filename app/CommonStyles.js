@@ -24,6 +24,11 @@ var commonStyles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems: 'center'
+    },
+    errorViewContainer : {
+        flex:1,
+        justifyContent:'center',
+        alignItems: 'center'
     }
 });
 

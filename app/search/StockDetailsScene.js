@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Image, ActivityIndicator, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import commonStyles from '../CommonStyles'
-import {LoadingView, MyText} from '../Common'
+import {LoadingView, MyText, ErrorView} from '../Common'
 import util from '../Utils'
 
 class StockDetailsScene extends Component {
@@ -32,15 +32,18 @@ class StockDetailsScene extends Component {
 
     render() {
         let {stock} = this.props;
-        if (this.state.dataFetched != true) {
-            return <LoadingView />
-        } else {
-            return (
-                <View style={[commonStyles.container]}>
-                    <Header symbol={this.stockViewData.symbol} name={this.stockViewData.name}/>
-                    <CurrentStockPrice stockViewData={this.stockViewData}/>
-                </View>
-            )
+        switch(this.state.dataFetched) {
+            case undefined:
+                return <LoadingView />;
+            case false:
+                return <ErrorView/>;
+            case true:
+                return (
+                    <View style={[commonStyles.container]}>
+                        <Header symbol={this.stockViewData.symbol} name={this.stockViewData.name}/>
+                        <CurrentStockPrice stockViewData={this.stockViewData}/>
+                    </View>
+                )
         }
     }
 }
