@@ -35,6 +35,8 @@ exports.backgroundColorForPredictionType = function (predictionType) {
         case '2L' :
         case '5L' :
             return '#f66323';
+        case 'X' :
+            return 'grey';
     }
 };
 
@@ -52,5 +54,7 @@ exports.descriptionForPredictionType = function (predictionType) {
             return '2% BEARISH';
         case '5L' :
             return '5% BEARISH';
+        case 'X' :
+            return 'No Prediction'
     }
 };

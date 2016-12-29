@@ -33,7 +33,7 @@ class StockDetailsScene extends Component {
 
     render() {
         let {stock} = this.props;
-        switch(this.state.dataFetched) {
+        switch (this.state.dataFetched) {
             case undefined:
                 return <LoadingView />;
             case false:
@@ -43,7 +43,7 @@ class StockDetailsScene extends Component {
                     <View style={[commonStyles.container]}>
                         <Header symbol={this.stockViewData.symbol} name={this.stockViewData.name}/>
                         <CurrentStockPrice stockViewData={this.stockViewData}/>
-                        <PredictionSlider/>
+                        <PredictionSlider stockViewData={this.stockViewData}/>
                     </View>
                 )
         }
@@ -53,46 +53,46 @@ class StockDetailsScene extends Component {
 class PredictionSlider extends Component {
     constructor(props) {
         super(props);
-        this.state = {'value' : -1};
+
+
+        const predictionTypeValueMap = new Map();
+        predictionTypeValueMap.set(-3, '5L');
+        predictionTypeValueMap.set(-2, '2L');
+        predictionTypeValueMap.set(-1, 'L');
+        predictionTypeValueMap.set(0, 'X');
+        predictionTypeValueMap.set(1, 'G');
+        predictionTypeValueMap.set(2, '2G');
+        predictionTypeValueMap.set(3, '5G');
+        this.predictionTypeValueMap = predictionTypeValueMap;
+        //initial value of the slider to be updated from the data returned from server for current stock details
+        this.state = {'sliderValueNumber': this.getPredictionValueForType(this.props.stockViewData.myPrediction)}
     }
 
-    getPredictionTypeForValue(value) {
-        switch (value) {
-            case -3:
-                return '5L';
-            case -2:
-                return '2L';
-            case -1:
-                return 'L';
-            case 1:
-                return 'G';
-            case 2:
-                return '2G';
-            case 3:
-                return '5G';
+    getPredictionValueForType(type) {
+        let entries = this.predictionTypeValueMap.entries();
+        let next = entries.next();
+        while (next) {
+            if (next.value[1] == type) {
+                return next.value[0];
+            }
+            next = entries.next();
         }
         return undefined;
     }
-    render() {
-        let predictionValueView = undefined;
-        if ( this.state.value != 0 ) {
-            let predictionType = this.getPredictionTypeForValue(this.state.value);
-            let backgroundColor = util.backgroundColorForPredictionType(predictionType);
-            let borderColor = backgroundColor;
-            predictionValueView = (
-                <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
-                    <MyText style={styles.predictionValue} data={util.descriptionForPredictionType(predictionType)}/>
-                </View>
-            )
-        }
 
+
+    render() {
+        let predictionType = this.predictionTypeValueMap.get(this.state.sliderValueNumber);
+        let backgroundColor = util.backgroundColorForPredictionType(predictionType);
+        let borderColor = backgroundColor;
+        console.log("rendering for value = " + this.state.sliderValueNumber);
         return (
             <View style={[commonStyles.sliderContainer]}>
                 <MyText style={styles.sliderTitle} data="Choose a prediction"></MyText>
                 <Slider
-                    value={this.state.value}
+                    value={this.state.sliderValueNumber}
                     step={1}
-                    onValueChange={(value) => this.setState({'value' : value})}
+                    onSlidingComplete={(value) => this.setState({'sliderValueNumber' : value})}
                     minimumValue={-3}
                     maximumValue={3}
                     trackStyle={styles.track}
@@ -100,7 +100,9 @@ class PredictionSlider extends Component {
                     minimumTrackTintColor='#1073ff'
                     maximumTrackTintColor='#b7b7b7'
                 />
-                {predictionValueView}
+                <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
+                        <MyText style={styles.predictionValue} data={util.descriptionForPredictionType(predictionType)}/>
+                </View>
             </View>
         )
     }
@@ -169,12 +171,12 @@ const styles = StyleSheet.create({
         padding: 10,
         marginLeft: 10,
         marginRight: 10,
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: '#ededed',
         borderRadius: 4,
     },
-    sliderTitle : {
-        fontSize : 16,
+    sliderTitle: {
+        fontSize: 16,
         color: 'blue'
     },
     predictionValueContainer: {
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: '#85c559'
+        borderColor: '#85c559',
     },
     predictionValue: {
         textAlign: 'center',
