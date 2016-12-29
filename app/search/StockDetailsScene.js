@@ -3,12 +3,11 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, Image, ActivityIndicator, TouchableHighlight} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, Picker, ActivityIndicator,ScrollView, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import commonStyles from '../CommonStyles'
 import {LoadingView, MyText, ErrorView} from '../Common'
 import util from '../Utils'
-import Slider from 'react-native-slider'
 
 class StockDetailsScene extends Component {
     constructor(props) {
@@ -40,71 +39,51 @@ class StockDetailsScene extends Component {
                 return <ErrorView/>;
             case true:
                 return (
-                    <View style={[commonStyles.container]}>
+                    <ScrollView style={[commonStyles.container]}>
                         <Header symbol={this.stockViewData.symbol} name={this.stockViewData.name}/>
                         <CurrentStockPrice stockViewData={this.stockViewData}/>
-                        <PredictionSlider stockViewData={this.stockViewData}/>
-                    </View>
+                        <PredictionPicker stockViewData={this.stockViewData} />
+                    </ScrollView>
                 )
         }
     }
 }
 
-class PredictionSlider extends Component {
+class PredictionPicker extends Component {
     constructor(props) {
         super(props);
-
-
-        const predictionTypeValueMap = new Map();
-        predictionTypeValueMap.set(-3, '5L');
-        predictionTypeValueMap.set(-2, '2L');
-        predictionTypeValueMap.set(-1, 'L');
-        predictionTypeValueMap.set(0, 'X');
-        predictionTypeValueMap.set(1, 'G');
-        predictionTypeValueMap.set(2, '2G');
-        predictionTypeValueMap.set(3, '5G');
-        this.predictionTypeValueMap = predictionTypeValueMap;
-        //initial value of the slider to be updated from the data returned from server for current stock details
-        this.state = {'sliderValueNumber': this.getPredictionValueForType(this.props.stockViewData.myPrediction)}
+        this.state = {'value' : this.props.stockViewData.myPrediction};
     }
-
-    getPredictionValueForType(type) {
-        let entries = this.predictionTypeValueMap.entries();
-        let next = entries.next();
-        while (next) {
-            if (next.value[1] == type) {
-                return next.value[0];
-            }
-            next = entries.next();
-        }
-        return undefined;
-    }
-
 
     render() {
-        let predictionType = this.predictionTypeValueMap.get(this.state.sliderValueNumber);
-        let backgroundColor = util.backgroundColorForPredictionType(predictionType);
-        let borderColor = backgroundColor;
-        console.log("rendering for value = " + this.state.sliderValueNumber);
+        let disableUpdateButton = this.props.stockViewData.myPrediction === this.state.value;
+        let updateButtonLabel = disableUpdateButton ? "Current Prediction" : "Update Prediction";
+        let updateButtonbackgroundColor = disableUpdateButton ? "grey" : "#85c559";
         return (
-            <View style={[commonStyles.sliderContainer]}>
-                <MyText style={styles.sliderTitle} data="Choose a prediction"></MyText>
-                <Slider
-                    value={this.state.sliderValueNumber}
-                    step={1}
-                    onSlidingComplete={(value) => this.setState({'sliderValueNumber' : value})}
-                    minimumValue={-3}
-                    maximumValue={3}
-                    trackStyle={styles.track}
-                    thumbStyle={styles.thumb}
-                    minimumTrackTintColor='#1073ff'
-                    maximumTrackTintColor='#b7b7b7'
-                />
-                <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>
-                        <MyText style={styles.predictionValue} data={util.descriptionForPredictionType(predictionType)}/>
-                </View>
+            <View style={[styles.pickerContainer]}>
+                <MyText style={styles.pickerTitle} data="My prediction"></MyText>
+                <Picker
+                    selectedValue={this.state.value}
+                    onValueChange={(item) => this.setState({'value' : item})}
+                >
+                    <Picker.Item label="5% Bearish" value="5L"/>
+                    <Picker.Item label="2% Bearish" value="2L"/>
+                    <Picker.Item label="Bearish" value="L" />
+                    <Picker.Item label="-Select-" value="X"/>
+                    <Picker.Item label="Bullish" value="G"/>
+                    <Picker.Item label="2% Bullish" value="2G"/>
+                    <Picker.Item label="5% Bullish" value="5G"/>
+                </Picker>
+                <TouchableHighlight style={[commonStyles.submitButton, {backgroundColor : updateButtonbackgroundColor, borderColor : updateButtonbackgroundColor}]}
+                                    disabled={disableUpdateButton}
+                                    underlayColor='#efefef'
+                                    onPress={() => console.log("Prediction updated "+this.state.value)}>
+                    <View>
+                        <MyText style={commonStyles.submitButtonLabel} data={updateButtonLabel} />
+                    </View>
+                </TouchableHighlight>
             </View>
-        )
+        );
     }
 }
 
@@ -166,45 +145,17 @@ const styles = StyleSheet.create({
     changePercentage: {
         fontSize: 12,
     },
-    sliderContainer: {
+    pickerContainer: {
         // height: 60,
         padding: 10,
         marginLeft: 10,
         marginRight: 10,
-        borderWidth: 1,
         borderColor: '#ededed',
         borderRadius: 4,
     },
-    sliderTitle: {
+    pickerTitle: {
         fontSize: 16,
-        color: 'blue'
+        color: 'blue',
+        marginBottom : 5,
     },
-    predictionValueContainer: {
-        backgroundColor: '#85c559',
-        width: 100,
-        height: 30,
-
-        borderRadius: 4,
-        borderWidth: 1,
-        borderColor: '#85c559',
-    },
-    predictionValue: {
-        textAlign: 'center',
-        color: 'white',
-        paddingTop: 5,
-    },
-    track: {
-        height: 2,
-        borderRadius: 1,
-    },
-    thumb: {
-        width: 30,
-        height: 30,
-        borderRadius: 30 / 2,
-        backgroundColor: 'white',
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
-        shadowRadius: 2,
-        shadowOpacity: 0.35,
-    }
 });

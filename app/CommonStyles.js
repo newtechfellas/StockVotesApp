@@ -29,6 +29,20 @@ var commonStyles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems: 'center'
+    },
+    submitButton : {
+        backgroundColor: '#85c559',
+        height: 40,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#85c559',
+    },
+
+    submitButtonLabel : {
+        textAlign: 'center',
+        color: 'white',
+        paddingTop: 5,
+        fontSize: 16
     }
 });
 
