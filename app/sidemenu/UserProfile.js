@@ -16,8 +16,6 @@ export default class UserProfile extends Component {
             <Drawer
                 ref="navigation"
                 open={state.open}
-                onOpen={()=>Actions.refresh({key:state.key, open: true})}
-                onClose={()=>Actions.refresh({key:state.key, open: false})}
                 type="displace"
                 content={<View ><Text>Foo</Text></View>}
                 tapToClose={true}
