@@ -55,7 +55,7 @@ export default class SearchScene extends Component {
                                onChangeText={(text) => this.setState({text})}
                                value={this.state.text}
                     />
-                    <TouchableHighlight underlayColor='#efefef' onPress={Actions.pop} style={styles.cancel}>
+                    <TouchableHighlight underlayColor='#efefef' onPress={() => { Actions.pop(); setTimeout(()=> Actions.refresh(), 200)}} style={styles.cancel}>
                         <Text style={{color: 'green', width: 20, fontSize: 15}}>X</Text>
                     </TouchableHighlight>
                 </View>
