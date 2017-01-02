@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native';
 import {Actions} from 'react-native-router-flux'
+import {PushScene, SEARCH_SCENE_KEY} from '../Scenes'
 
 const Header = () => (
     <View style={styles.header}>
@@ -20,7 +21,7 @@ class SearchIcon extends Component {
     render() {
         return (
             <View style={styles.headerSearchIcon}>
-                <TouchableHighlight underlayColor='#efefef' onPress={Actions.search}>
+                <TouchableHighlight underlayColor='#efefef' onPress={() => PushScene(SEARCH_SCENE_KEY)}>
                     <Image style={styles.headerIconImage} source={require('../../images/Search-Green-50.png')}/>
                 </TouchableHighlight>
             </View>

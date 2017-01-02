@@ -4,10 +4,10 @@
 
 import React, {Component} from 'react';
 import {View, Image, TextInput, Text, StyleSheet, ScrollView, Platform, TouchableHighlight} from 'react-native';
-import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
 import {MyText} from '../Common'
+import {PopScene, PushScene, STOCK_DETAILS_SCENE_KEY} from '../Scenes'
 
 export default class SearchScene extends Component {
     constructor() {
@@ -55,7 +55,7 @@ export default class SearchScene extends Component {
                                onChangeText={(text) => this.setState({text})}
                                value={this.state.text}
                     />
-                    <TouchableHighlight underlayColor='#efefef' onPress={() => { Actions.pop(); setTimeout(()=> Actions.refresh(), 200)}} style={styles.cancel}>
+                    <TouchableHighlight underlayColor='#efefef' onPress={() => PopScene()} style={styles.cancel}>
                         <Text style={{color: 'green', width: 20, fontSize: 15}}>X</Text>
                     </TouchableHighlight>
                 </View>
@@ -71,7 +71,7 @@ export default class SearchScene extends Component {
 
 
 const StockScrollItem = ({stock, index}) => (
-    <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: stock})}>
+    <TouchableHighlight underlayColor='#efefef' onPress={() => PushScene(STOCK_DETAILS_SCENE_KEY, {stock: stock})}>
         <View style={styles.scrollItem}>
             <MyText style={styles.scrollItemStockSymbol} data={stock.symbol} />
             <MyText style={styles.scrollItemStockName} data={stock.name} />

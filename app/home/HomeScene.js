@@ -9,16 +9,38 @@ import TrendingStocks from './TrendingStocks'
 import OpenPredictions from './OpenPredictions'
 import util from '../Utils'
 import commonStyles from '../CommonStyles'
+import {GetCurrentSceneKey, HOME_SCENE_KEY} from '../Scenes'
 
 class HomeScene extends Component {
     constructor() {
         super();
         this.state = {};
+        this.apiCalledTimestamp = undefined;
+        this.apiCallIntervalHook = undefined;
         this.homeViewData = {};
     }
 
+    componentWillUnmount() {
+        if ( this.apiCallIntervalHook ) {
+            clearInterval(this.apiCallIntervalHook);
+        }
+    }
+
     componentDidMount() {
+       this.fetchDataAndUpdateState();
+       this.apiCallIntervalHook = setInterval(() => {
+                if (GetCurrentSceneKey() == HOME_SCENE_KEY) {
+                    this.fetchDataAndUpdateState();
+                } else {
+                    util.LogDebug("data fetch ignored. Homeview is not active view");
+                }
+        }, 5 * 60 * 1000); //call API every 5 minutes
+    }
+
+    fetchDataAndUpdateState() {
         let component = this;
+        this.apiCalledTimestamp = Date.now();
+        console.log("Fetching data for Home View");
         let data = util.FetchHomeViewData()
             .then((responseJson) => {
                 //persist the data in Cache

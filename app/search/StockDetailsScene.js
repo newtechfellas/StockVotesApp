@@ -4,10 +4,10 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Image, Picker, ActivityIndicator,ScrollView, TouchableHighlight} from 'react-native';
-import {Actions} from 'react-native-router-flux'
 import commonStyles from '../CommonStyles'
 import {LoadingView, MyText, ErrorView} from '../Common'
 import util from '../Utils'
+import {PopScene} from '../Scenes'
 
 class StockDetailsScene extends Component {
     constructor(props) {
@@ -106,7 +106,7 @@ const CurrentStockPrice = ({stockViewData}) => {
 const Header = ({symbol, name}) => (
 
     <View style={styles.header}>
-        <TouchableHighlight underlayColor='#efefef' onPress={Actions.pop}>
+        <TouchableHighlight underlayColor='#efefef' onPress={() => PopScene()}>
             <Image resizeMode="cover" style={styles.headerMenuIcon}
                    source={require('../../images/Bulleted-List-Filled-100.png')}/>
         </TouchableHighlight>

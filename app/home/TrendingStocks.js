@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, Text, Image, TouchableHighlight} from 'react-native';
 import {MyText} from '../Common'
-import {Actions} from 'react-native-router-flux'
+import {PushScene, STOCK_DETAILS_SCENE_KEY} from '../Scenes'
 
 export default class TrendingStocks extends Component {
     render() {
@@ -24,7 +24,7 @@ export default class TrendingStocks extends Component {
 }
 
 const TrendingItem = ({stock}) => (
-    <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: stock})}>
+    <TouchableHighlight underlayColor='#efefef' onPress={() => PushScene(STOCK_DETAILS_SCENE_KEY, {stock: stock})}>
         <View style={styles.trendingStockItem}>
             <MyText style={styles.stockSymbol} data={stock.symbol} />
             <View style={styles.trendingValueContainer}>

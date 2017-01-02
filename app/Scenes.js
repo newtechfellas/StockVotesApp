@@ -20,14 +20,58 @@ import UserProfile from './sidemenu/UserProfile'
     }
  */
 
+const STOCK_DETAILS_SCENE_KEY= "stockDetails";
+const SEARCH_SCENE_KEY= "search";
+const HOME_SCENE_KEY= "home";
+
 const scenes = Actions.create(
     <Scene key="root"  >
         <Scene key="drawer" component={UserProfile} open={false}>
-            <Scene key="home" component={HomeScene} panHandlers={null} title="Home" initial={true} hideNavBar={true} />
+            <Scene key={HOME_SCENE_KEY} component={HomeScene} panHandlers={null} title="Home" initial={true} hideNavBar={true} />
         </Scene>
-        <Scene key="search" direction="vertical" panHandlers={null} component={SearchScene} title="Search" hideNavBar={true}  />
-        <Scene key="stockDetails" direction="vertical" panHandlers={null} component={StockDetailsScene} title="StockDetails"  hideNavBar={true} />
+        <Scene key={SEARCH_SCENE_KEY} direction="vertical" panHandlers={null} component={SearchScene} title="Search" hideNavBar={true}  />
+        <Scene key={STOCK_DETAILS_SCENE_KEY} direction="vertical" panHandlers={null} component={StockDetailsScene} title="StockDetails"  hideNavBar={true} />
     </Scene>
 );
 
+// -------- UGLY SOLUTION TO MAINTAIN A GLOBAL STACK OF SCENE NAMES TO GET CURRENT SCENE NAME FROM ANY VIEW
+// react-native-router-flux does not have an option to get current scene name out of the box
+// http://stackoverflow.com/questions/41416879/refresh-view-only-if-its-in-viewport
+
+//refers to scene names stack. Instead of Actions.ACTION_NAME from View Components, PushScene method should be called
+//begin the stack with HOME VIEW SCENE KEY
+let GlobalSceneNamesStack = [HOME_SCENE_KEY];
+
+const PushScene = (sceneKey, props) => {
+    GlobalSceneNamesStack.push(sceneKey);
+    switch (sceneKey) {
+        case SEARCH_SCENE_KEY :
+            Actions.search();
+            return;
+        case STOCK_DETAILS_SCENE_KEY :
+            Actions.stockDetails(props);
+            return;
+        default:
+            console.log("== ERROR == : Unknown scenekey passed "+sceneKey);
+    }
+};
+
+const PopScene = () => {
+    GlobalSceneNamesStack.pop();
+    Actions.pop()
+};
+
+const PopAndRefreshScene = () => {
+    GlobalSceneNamesStack.pop();
+    Actions.pop();
+    setTimeout(() => Actions.refresh(), 200)
+};
+
+const GetCurrentSceneKey = () => {
+    return GlobalSceneNamesStack.length > 0 ? GlobalSceneNamesStack[GlobalSceneNamesStack.length-1] : undefined
+};
+
+// ------ UGLY SOLUTION ENDS -----
+
 export default scenes
+export { SEARCH_SCENE_KEY, STOCK_DETAILS_SCENE_KEY, HOME_SCENE_KEY, PushScene, PopScene, PopAndRefreshScene, GetCurrentSceneKey }

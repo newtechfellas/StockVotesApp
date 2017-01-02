@@ -4,9 +4,9 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
-import {Actions} from 'react-native-router-flux'
 import util from '../Utils'
 import {MyText} from '../Common'
+import {PushScene, STOCK_DETAILS_SCENE_KEY} from '../Scenes'
 
 export default class OpenPredictions extends Component {
     render() {
@@ -28,7 +28,7 @@ export default class OpenPredictions extends Component {
 }
 
 const OpenPredictionItem = ({prediction, backgroundColor, borderColor}) => (
-    <TouchableHighlight underlayColor='#efefef' onPress={() => Actions.stockDetails({stock: prediction})}>
+    <TouchableHighlight underlayColor='#efefef' onPress={() => PushScene(STOCK_DETAILS_SCENE_KEY, {stock: prediction})}>
         <View style={styles.openPredictionItem}>
             <MyText style={styles.predictionSymbol} data={prediction.symbol} />
             <View style={[styles.predictionValueContainer, {backgroundColor} , {borderColor}]}>

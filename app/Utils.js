@@ -58,3 +58,11 @@ exports.descriptionForPredictionType = function (predictionType) {
             return 'No Prediction'
     }
 };
+
+exports.LogDebug = (msg) => {
+    console.log(" == DEBUG == "+ msg)
+};
+
+exports.LogError = (msg) => {
+    console.log(" ^^^^ ERROR ^^^^ :"+ msg)
+};
