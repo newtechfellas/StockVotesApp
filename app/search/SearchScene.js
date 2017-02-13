@@ -60,7 +60,7 @@ export default class SearchScene extends Component {
                     </TouchableHighlight>
                 </View>
                 <ScrollView keyboardDismissMode='on-drag'
-                            keyboardShouldPersistTaps={true}
+                            keyboardShouldPersistTaps="always"
                             style={[styles.searchResultsScroll, commonStyles.container]}>
                     {symbolRows}
                 </ScrollView>

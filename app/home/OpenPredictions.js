@@ -18,7 +18,7 @@ export default class OpenPredictions extends Component {
             <View style={styles.OpenPredictions}>
                 <Text style={styles.openPredictionTitle}>Active Predictions</Text>
                 <ScrollView keyboardDismissMode='on-drag'
-                            keyboardShouldPersistTaps={true}
+                            keyboardShouldPersistTaps="always"
                 >
                     {predictionRows}
                 </ScrollView>

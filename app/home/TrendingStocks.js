@@ -14,7 +14,7 @@ export default class TrendingStocks extends Component {
             <View style={styles.TrendingStocks}>
                 <Text style={styles.stockTitle}>Trending Stocks</Text>
                 <ScrollView keyboardDismissMode='on-drag'
-                            keyboardShouldPersistTaps={true}
+                            keyboardShouldPersistTaps="always"
                 >
                     {trendingRows}
                 </ScrollView>
