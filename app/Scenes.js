@@ -52,7 +52,7 @@ const PushScene = (sceneKey, props) => {
             Actions.stockDetails(props);
             return;
         default:
-            console.log("== ERROR == : Unknown scenekey passed "+sceneKey);
+            console.log("== ERROR == : Unknown scene key passed "+sceneKey);
     }
 };
 
@@ -62,8 +62,7 @@ const PopScene = () => {
 };
 
 const PopAndRefreshScene = () => {
-    GlobalSceneNamesStack.pop();
-    Actions.pop();
+    PopScene();
     setTimeout(() => Actions.refresh(), 200)
 };
 

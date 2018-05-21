@@ -84,21 +84,32 @@ exports.MockFetchStockSymbols = function () {
 };
 
 exports.MockFetchStockDetails = function (stock) {
-    let data = {
-        'symbol' : stock,
-        'name': 'Stock Name',
-        'totalPredictions' : 123,
-        'myPrediction' : 'L',
-        'currentPrice' :  343.3,
-        'changePrice' :  -4.1,
-        'changePercentage' : 1.3,
-        'highPrice' : 343,
-        'openPrice' : 312,
-        'lowPrice' : 310,
-        'volume' : 3434343,
-        'averageVolume': 343453,
-    };
-    return wrapWithPromise(data);
+    // return wrapWithPromise(data);
+    return fetch('https://finance.google.com/finance/info?client=ig&q=NASDAQ%3A'+stock)
+        .then((response) => response.text())
+        .then((responseText) => JSON.parse(responseText.replace('//','')))
+        .then((responseJson) => {
+            console.log("responseJson is "+ responseJson);
+            let stockData = responseJson[0];
+            let data = {
+                'symbol' : stockData.t,
+                'name': 'Stock Name',
+                'totalPredictions' : 123,
+                'myPrediction' : 'L',
+                'currentPrice' :  stockData.l,
+                'changePrice' :  parseFloat(stockData.c_fix),
+                'changePercentage' : parseFloat(stockData.cp_fix),
+                'highPrice' : 343,
+                'openPrice' : 312,
+                'lowPrice' : 310,
+                'volume' : 3434343,
+                'averageVolume': 343453,
+            };
+            return data ;
+        })
+        .catch((error) => {
+            console.log("Error in fetching data for "+stock+". Error is "+error)
+        });
 };
 
 

@@ -10,6 +10,7 @@
     "react": "15.4.2",
     "react-native": "^0.41.2",
     "react-native-drawer": "^2.3.0",
+    "react-native-error-reporter": "^1.0.7",
     "react-native-router-flux": "^3.37.0",
     "react-native-slider": "^0.9.1"
   },
